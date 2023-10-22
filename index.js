@@ -18,6 +18,10 @@ app.get("/contact", (req, res) => {
   res.render("contact.ejs");
 });
 
+app.get("/start",(req,res)=>{
+  res.render("index1.ejs");
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
