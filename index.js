@@ -22,6 +22,10 @@ app.get("/start",(req,res)=>{
   res.render("index1.ejs");
 });
 
+app.get("/go",(req,res)=>{
+  res.render("index2.ejs");
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
