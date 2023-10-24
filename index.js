@@ -52,7 +52,13 @@ const audioFun=async()=>{
   
   });
 
-
+app.post("submitt", (req, res) => {
+    const data = req.body["name"];
+    console.log(req.body["name"]);
+    console.log(req.body["email"]);
+    console.log(req.body["text"]);
+    res.render("contact.ejs",{ data1: data });
+  });
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
