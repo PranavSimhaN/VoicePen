@@ -12,10 +12,79 @@
 
   <title>Basic Page</title>
   <style>
-.aaaa{
-    color: aliceblue;
+    #custom-button {
+  padding: 10px;
+  color: white;
+  background-color: #2963c9;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
 }
-    
+
+#custom-button:hover {
+  background-color: #5485b5;
+}
+
+#custom-text {
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: #aaa;
+}
+:root {
+  --primary-color: #356aff;
+  --bg-color: #fff;
+  --text-color: #3586ff;
+  --light-text-color: #a5a5a5;
+  
+  --body-bg-color: #f1f1f1;
+
+}
+.x{
+    width: 100%;
+  min-height: 200px;
+  padding: 10px;
+  border: 1px solid var(--light-text-color);
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #17a2b8;
+}
+.y{
+    color:#3586ff;
+    font-size: 30px;
+}
+.xx{
+    color: #356aff;
+    padding: 30px;
+    font-size: 10px;
+}
+.xy{
+    color: #6f42c1;
+    padding: 30px;
+    font-size: 10px;
+}
+.z{
+    color: #356aff;
+}
+.q{
+   
+}
+.yz{
+   
+  background: #ffffff;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: all 0.3s;
+  margin-top: -4px;
+  font-weight: 700;
+  justify-content: center
+}
   </style>
 </head>
 <header>
@@ -48,15 +117,110 @@
   </nav>
 </header>
 <main class="container">
-<input type="file" id='file'>
-<!-- <button onclick="myFile()"></button> -->
-<button type="button" class="btn btn-light aaaa" onclick="myFile()"></button>
+
+    <div class="xx">
+        <h1>FILE TO TEXT:</h1>
+        </div>
+
+    <input type="file" id="real-file" hidden="hidden" />
+    <button type="button" id="custom-button">CHOOSE A FILE</button>
+    <span id="custom-text">No file chosen, yet.</span>
+
+    
+    <div class="xy">
+        <h2>(Note : Copy the above path and paste below.)</h2>
+    </div>
+      <form action="/submit" method="POST" class="q">
+        <input type="text" name="fName" placeholder="paste here" class="yz">
+        <input type="submit" value="OK" class="r">
+      </form>
+
+
+
+
 
 
 <script>
-    function myFile(){
-        document.getElementById('file').click();
-    }
+     downloadBtn = document.querySelector(".download");
+    const realFileBtn = document.getElementById("real-file");
+const customBtn = document.getElementById("custom-button");
+const customTxt = document.getElementById("custom-text");
+
+customBtn.addEventListener("click", function() {
+  realFileBtn.click();
+});
+
+realFileBtn.addEventListener("change", function() {
+  if (realFileBtn.value) {
+    customTxt.innerHTML = realFileBtn.value.match(
+      /[\/\\]([\w\d\s\.\-\(\)]+)$/
+    )[1];
+    console.log(customTxt.innerHTML);
+  } else {
+    customTxt.innerHTML = "No file chosen, yet.";
+  }
+});
+
+    const OpenAI=require("openai");
+const fs=require("fs");
+const openai = new OpenAI({
+    apiKey:"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"
+});
+let data;
+
+const audioFun=async()=>{
+    const transcription = await openai.audio.transcriptions.create({
+        file:fs.createReadStream(`${data}`),
+        model:"whisper-1"
+    });
+    console.log(transcription.text);
+    
+
+
+
+    // fs.writeFile("message.txt",transcription.text, (err) => {
+    //     if (err) throw err;
+    //     console.log("The file has been saved!");
+    //   });
+
+//     const blob = new Blob([transcription.text],{type:"octet-stream"});
+
+// const href = URL.createObjectURL(blob);
+
+// const a = Object.assign(document.createElement("a"),{
+//     href,
+//     style:"display;none",
+//     download:"myData.txt"
+// });
+// document.body.appendChild(a)
+
+// a.click();
+// URL.revokeObjectURL(href);
+// a.remove();
+}
+
+audioFun();
+
+// function download() {
+//   const text = data;
+//   const filename = "speech.txt";
+
+//   const element = document.createElement("a");
+//   element.setAttribute(
+//     "href",
+//     "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+//   );
+  
+//   element.setAttribute("download", filename);
+//   element.style.display = "none";
+//   document.body.appendChild(element);
+//   element.click();
+//   document.body.removeChild(element);
+// }
+
+// downloadBtn.addEventListener("click", download);
+
+
 </script>
 
 <%- include("partials/footer.ejs") %>

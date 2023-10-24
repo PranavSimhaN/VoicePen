@@ -83,6 +83,26 @@ textarea {
   background: #3586ff;
 }
 
+[type="submitt"] {
+  width: 50%;
+  background: #3586ff;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: all 0.3s;
+  margin-top: -4px;
+  font-weight: 700;
+  justify-content: center;
+}
+[type="submitt"]:hover {
+  background: #3586ff;
+}
+
+
 .b{
   display: flex;
   justify-content: center;
