@@ -2,7 +2,7 @@
 WEC club's task
 
 I was very exicted about WEC club.
-When i got to know about the recruitments i had just completed frontend and i was about to start backend.
+When i got to know about the recruitments i had just completed frontend and i had some idea of backend.
 So in the given period of time i tried finishing backend and in last 5 days i made this project.
 
 So coming to the project ,
